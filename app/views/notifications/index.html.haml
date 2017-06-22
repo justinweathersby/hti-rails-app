@@ -1,0 +1,5 @@
+%h1 Notifications
+
+- @notifications.each do |notification|
+
+  = link_to "Notifikation#{notification.id}", notification_path(notification)

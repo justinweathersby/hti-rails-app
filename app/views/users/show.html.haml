@@ -1,0 +1,53 @@
+= @user.email
+
+
+= link_to 'Edit', edit_user_path(@user)
+
+.col-xs-12.col-lg-8.col-lg-offset-2{:style => " margin-top: 3vh; padding:15px;"}
+  .portlet.light
+    .portlet-title
+      .caption.font-red-sunglo
+        %span.caption-subject.bold.uppercase{:style => "font-size:24px"}= @user.name
+        %br/
+        %small{:style => "font-size:12px; color:gray"}= @user.created_at.strftime("Member Since: %m/%d/%Y")
+        / <small style="color:gray"><haml_loud> @user.name </haml_loud></small>
+      .actions
+        = link_to :back, :class => "btn btn-circle btn-icon-only red" do
+          %i.icon-trash
+        - if signed_in? and current_user == @user
+          = link_to edit_user_registration_path, :class => "btn btn-circle btn-icon-only blue" do
+            %i.icon-cloud-upload
+        %a.btn.btn-circle.btn-icon-only.btn-default.fullscreen{"data-original-title" => "", :href => "javascript:;", :title => ""}
+    .portlet-body.form
+      .row{:style => "margin-bottom:15px"}
+        .col-xs-12.col-sm-4
+          -#= image_tag @user.image.url(:medium), style: "width:100%; height:200px; object-fit:cover;"
+        .col-xs-12.col-sm-4
+          -#= image_tag @user.second_image.url(:medium), style: "width:100%; height:200px; object-fit:cover;"
+        .col-xs-12.col-sm-4
+          -#= image_tag @user.third_image.url(:medium), style: "width:100%; height:200px; object-fit:cover;"
+      .form-group.form-md-line-input.form-md-floating-label{:style => "margin-bottom:15px"}
+        -#%textarea.form-control{:placeholder => "#{@user.description}", :readonly => "readonly", :rows => "3"}
+        / <input type="text" class="form-control" readonly="" value="<haml_loud> @user.description </haml_loud>" id="form_control_1">
+        %label{:for => "form_control_1"} Description
+      .form-group.form-md-line-input.form-md-floating-label{:style => "margin-bottom:15px"}
+        %input#form_control_1.form-control{:readonly => "readonly", :type => "text", :value => "#{@user.email}"}/
+        %label{:for => "form_control_1"} Email
+      .form-group.form-md-line-input.form-md-floating-label{:style => "margin-bottom:15px"}
+        %input#form_control_1.form-control{:readonly => "readonly", :type => "text", :value => "#{@user.name}"}/
+        %label{:for => "form_control_1"} Name
+      -#.form-group.form-md-line-input.form-md-floating-label{:style => "margin-bottom:15px"}
+        %input#form_control_1.form-control{:readonly => "readonly", :type => "text", :value => "#{@user.gender}"}/
+        %label{:for => "form_control_1"} Gender
+      -#.form-group.form-md-line-input.form-md-floating-label{:style => "margin-bottom:15px"}
+        %input#form_control_1.form-control{:readonly => "readonly", :type => "text", :value => "#{@user.gender_match}"}/
+        %label{:for => "form_control_1"} Gender Match
+      -#.form-group.form-md-line-input.form-md-floating-label{:style => "margin-bottom:15px"}
+        %input#form_control_1.form-control{:readonly => "readonly", :type => "text", :value => "#{@user.workout_level}"}/
+        %label{:for => "form_control_1"} Workout Level
+      -#.form-group.form-md-line-input.form-md-floating-label{:style => "margin-bottom:15px"}
+        %input#form_control_1.form-control{:readonly => "readonly", :type => "text", :value => "#{@user.workout_time}"}/
+        %label{:for => "form_control_1"} Workout Time
+      .row.text-center
+        = link_to "Go Back", :back, :class => "btn btn-next", :style => "color:white; border-radius: 5px !important; margin-top:10px; background: #FF5252; font-family: 'Muli', 'Helvetica', 'Arial', 'sans-serif'; text-shadow:none; text-decoration:none; width: 92%"
+  / END EXAMPLE TABLE PORTLET

@@ -1,0 +1,83 @@
+.row{:style => "padding-top:40px"}
+  .col-xs-12.col-md-8.col-lg-6.col-md-offset-2.col-lg-offset-3{:style => "padding-left:0; padding-right:0"}
+    %div{:style => " width:100%;"}
+      .row{:style => "margin-left:0; margin-right:0"}
+        .col-sm-12.form-box
+          = form_for(resource, as: resource_name,  url: session_path(resource_name), :html => {:class => 'f1', :style => ''}) do |f|
+            %div{:style => "visibility: hidden; height:0;"}
+              = flash[:notice] #= flash[:notice].to_a.concat resource.errors.full_messages
+            .f1-steps{:style => "padding-bottom: 20px; margin-top:0"}
+              .f1-step.active{:style => "float:none; margin: 0 auto"}
+                .f1-step-icon{:style => "background: #455A64; border-radius: 50% !important"}
+                  %i.fa.fa-user
+            .form-group.form-md-line-input.form-md-floating-label{:style => "padding-bottom: 0px; margin-bottom:0"}
+              .input-group{:style => ""}
+                = f.text_field :email, class: "form-control", style: "width:100%"
+                %label{:for => "form_control_1", :style => "font-size:12px;"} Email
+                %span.input-group-addon
+                  %i.fa.fa-envelope-o
+            .form-group.form-md-line-input.form-md-floating-label{:style => "padding-bottom: 5px;"}
+              .input-group
+                = f.password_field :password, autocomplete: "off", class: "form-control", style: "width:100%"
+                %label{:for => "form_control_1", :style => "font-size:12px;"} Password
+                %span.input-group-addon
+                  %i.fa.fa-lock
+            .row{:style => "text-align:center"}
+              = f.submit 'Login', :class => "btn btn-next", :style => "border-radius: 5px !important; margin-top:10px; background: #FF5252; font-family: 'Muli', 'Helvetica', 'Arial', 'sans-serif'; text-shadow:none; font-variant:none; width: 92%"
+            .row{:style => "text-align:center"}
+              = link_to 'Signup', new_user_registration_path, :class => "btn btn-default btn-sm", :style => "border-radius: 5px !important; margin-top:10px; font-family: 'Muli', 'Helvetica', 'Arial', 'sans-serif'; font-size: 10px; text-shadow:none; font-variant:none; text-decoration:none"
+              = link_to 'Forgot your password?', new_password_path(resource_name), :class => "btn btn-default btn-sm", :style => "border-radius: 5px !important; margin-top:10px; font-family: 'Muli', 'Helvetica', 'Arial', 'sans-serif'; font-size: 10px; text-shadow:none; font-variant:none; text-decoration:none"
+            = f.hidden_field :role, value: "gymManager"
+  /
+    <h2>New Session</h2>
+
+    <haml_loud> form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| </haml_loud><haml_block>
+    <div class="field">
+    <haml_loud> f.label :email </haml_loud><br />
+    <haml_loud> f.email_field :email, autofocus: true </haml_loud>
+    </div>
+
+    <div class="field">
+    <haml_loud> f.label :password </haml_loud><br />
+    <haml_loud> f.password_field :password, autocomplete: &quot;off&quot; </haml_loud>
+    </div>
+
+    <haml_silent>   if devise_mapping.rememberable?
+    </haml_silent><haml_block>    <div class="field">
+    <haml_loud> f.check_box :remember_me </haml_loud>
+    <haml_loud> f.label :remember_me </haml_loud>
+    </div>
+    </haml_block>
+    <div class="actions">
+    <haml_loud> f.submit &quot;Log in&quot; </haml_loud>
+    </div>
+    </haml_block>
+    <haml_loud> render &quot;users/shared/links&quot; </haml_loud>
+
+
+-#<h2>Log in</h2>
+-#
+-#<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+-#  <div class="field">
+-#    <%= f.label :email %><br />
+-#    <%= f.email_field :email, autofocus: true %>
+-#  </div>
+-#
+-#  <div class="field">
+-#    <%= f.label :password %><br />
+-#    <%= f.password_field :password, autocomplete: "off" %>
+-#  </div>
+-#
+-#  <% if devise_mapping.rememberable? -%>
+-#    <div class="field">
+-#      <%= f.check_box :remember_me %>
+-#      <%= f.label :remember_me %>
+-#    </div>
+-#  <% end -%>
+-#
+-#  <div class="actions">
+-#    <%= f.submit "Log in" %>
+-#  </div>
+-#<% end %>
+-#
+-#<%= render "users/shared/links" %>
