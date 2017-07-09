@@ -27,8 +27,7 @@ module HtiRailsApp
     config.middleware.insert_before 0, Rack::Cors do
      allow do
        origins '*'
-       resource '*', :headers => :any, :methods => [:get, :post, :options],
-       expose: ['Access-Token','Client']
+       resource '*', :headers => :any, :methods => [:get, :post, :options], :expose => ['Access-Token','Client']
      end
     end
   end
