@@ -1,22 +1,10 @@
--#%br
--#.row
--#  .col-sm-12
--#    .portlet.light.portlet-fit
--#      .portlet-title
--#        .caption
--#          %span.caption-subject.sbold.uppercase{:style => "color: #455A64 !important"} Create push notification
--#        .actions
--#          .btn-group.btn-group-devided
--#            -#= link_to 'Add New Gym', new_user_gym_path(current_user), class:"btn green btn-outline btn-sm active", style: "color: white;text-decoration:none"
--#      .portlet-body{:style => "padding-top: 0;"}
--#
+
 .col-xs-12.col-lg-8.col-lg-offset-2{:style => " margin-top: 3vh; padding:15px;"}
   .portlet.light
     .portlet-title
       .caption.font-red-sunglo
         %span.caption-subject.bold.uppercase{:style => "font-size:24px"} Create Push Notification
         %br/
-        -#%small{:style => "color:gray"}= @gym.name
       .actions
         = link_to :back, :class => "btn btn-circle btn-icon-only red" do
           %i.fa.fa-trash
@@ -41,6 +29,7 @@
                   %span
               %th Name
               %th Email
+              %th Device Token
               %th Joined
           %tbody
             - @users.each do |user|
@@ -51,6 +40,7 @@
                     %span
                 %td= user.name
                 %td= user.email
+                %td= user.device_token
                 %td{:style => "text-align:center; "}= user.created_at.strftime("%m/%d/%Y")
         .row{:style => "text-align:center"}
           = f.hidden_field :user_id, value: current_user.id
