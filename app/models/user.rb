@@ -5,4 +5,9 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
   include DeviseTokenAuth::Concerns::User
 
+  def destroy_expired_tokens
+    return if self.tokens == '{}'
+    super
+  end
+
 end
