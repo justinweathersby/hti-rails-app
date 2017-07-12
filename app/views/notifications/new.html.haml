@@ -32,7 +32,7 @@
               %th Device Token
               %th Joined
           %tbody
-            - @users.each do |user|
+            - User.all do |user|
               %tr.odd.gradeX
                 %td
                   %label.mt-checkbox.mt-checkbox-single.mt-checkbox-outline
