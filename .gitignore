@@ -15,3 +15,5 @@
 # Ignore development environment variables
 /.env
 /.idea
+
+public/assets
