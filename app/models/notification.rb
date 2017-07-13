@@ -6,7 +6,7 @@ class Notification < ApplicationRecord
   after_save :upload_notification_to_ionic
 
   validates :message, presence: true
-  validates :tokens, presence: true
+  validates :tokens,  presence: true
 
   # attribute :tokens, :string, array: true
   # serialize :tokens, Array
@@ -22,11 +22,11 @@ private
       "notification":{
         "message": self.message,
         "android":{
-          "title": "Crescent Ford",
+          "title": "HTI",
           "sound": "true"
         },
          "ios": {
-              "title": "Crescent Ford",
+              "title": "HTI",
               "sound": "true"
               # ,
               # "badge": 1
