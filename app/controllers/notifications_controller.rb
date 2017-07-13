@@ -9,7 +9,7 @@ class NotificationsController < ApplicationController
   end
 
   def new
-    @push_notification = Notification.new
+    @notification = Notification.new
     @users = User.all
     # @users = User.where.not('device_token' => nil)
   end
@@ -18,18 +18,20 @@ class NotificationsController < ApplicationController
   end
 
   def create
-    @push_notification = Notification.new(push_notification_params)
-    @push_notification.user_id = current_user.id
+    @users = User.all
 
-    @push_notification.sent_to = params[:tokens]
-    @push_notification.sent_to.each do |t|
-      device_token = User.find(t).device_token
-      @push_notification.tokens.push(device_token) unless device_token.nil?
+    @notification = Notification.new(notification_params)
+    @notification.user_id = current_user.id
+
+    @notification.sent_to = params[:tokens]
+    @notification.sent_to.each do |t|
+      device_token = @users.find(t).device_token
+      @notification.tokens.push(device_token) unless device_token.nil?
     end
 
     respond_to do |format|
-      if @push_notification.save
-        format.html { redirect_to push_notifications_path, notice: 'Push Notification was successfully created.' }
+      if @notification.save
+        format.html { redirect_to root_path, notice: 'Push Notification was successfully created.' }
       else
         format.html { render :new }
       end
@@ -39,13 +41,13 @@ class NotificationsController < ApplicationController
   def destroy
     Notification.find(params[:id]).destroy
     respond_to do |format|
-      format.html { redirect_to push_notifications_path, notice: 'Push Notification was successfully destroyed.' }
+      format.html { redirect_to root_path, notice: 'Push Notification was successfully destroyed.' }
     end
   end
 
   private
 
-  def push_notification_params
-    params.fetch(:push_notification, {}).permit(:message, :sent_to, :user_id, tokens:[])
+  def notification_params
+    params.fetch(:notification, {}).permit(:message, :sent_to, :user_id, tokens:[])
   end
 end

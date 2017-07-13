@@ -1,3 +1,25 @@
-%h1 Notification
+.col-xs-12.col-lg-8.col-lg-offset-2{:style => " margin-top: 3vh; padding:15px;"}
+  .portlet.light
+    .portlet-title
+      .caption.font-red-sunglo
+        %span.caption-subject.bold.uppercase{:style => "font-size:24px"} Push Notification
+        %br/
+        %small{:style => "font-size:12px; color:gray"}= @notification.created_at.strftime("Sent At: %m/%d/%Y")
 
-= @notification.id
+    .portlet-body.form
+      .form-group.form-md-line-input.form-md-floating-label{:style => "margin-bottom:15px"}
+        %input#form_control_1.form-control{:readonly => "readonly", :type => "text", :value => "#{@notification.message}"}/
+        %label{:for => "form_control_1"} Message
+      .form-group.form-md-line-input.form-md-floating-label{:style => "margin-bottom:15px"}
+        %input#form_control_1.form-control{:readonly => "readonly", :type => "text", :value => "#{User.find(@notification.user_id).email}"}/
+        %label{:for => "form_control_1"} Sent By
+      %h4{:style => "font-size: 13px; color: #999; font-family:verdana, arial, helvetica, sans-serif; font-weight: 400; letter-spacing: 0.5px;"} Sent To
+      - @notification.sent_to.each do |id|
+        %li{:style=> "margin-left:20px"}= User.find(id).email
+
+      -# .form-group.form-md-line-input.form-md-floating-label{:style => "margin-bottom:15px"}
+      -#   %input#form_control_1.form-control{:readonly => "readonly", :type => "text", :value => "#{@notification.sent_to.each do |id| User.find(id).email end}"}/
+      -#   %label{:for => "form_control_1"} Sent To
+      .row.text-center
+        = link_to "Go Back", :back, :class => "btn btn-next", :style => "color:white; border-radius: 5px !important; margin-top:10px; background: #FF5252; font-family: 'Muli', 'Helvetica', 'Arial', 'sans-serif'; text-shadow:none; text-decoration:none; width: 92%"
+  / END EXAMPLE TABLE PORTLET

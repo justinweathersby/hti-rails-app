@@ -15,4 +15,13 @@
   %body.main-background{'cz-shortcut-listen' => 'true'}
     = render partial: 'layouts/menu'
     .container{style: 'padding-top: 50px;'}
+      - flash.each do |name, msg|
+        = content_tag(:div,  msg.kind_of?(Array) ? msg.join(', ') : msg, class: "alert alert-info") if msg.length > 0
       = yield
+
+      :javascript
+        window.setTimeout(function () {
+             $(".alert-info").slideUp(500, function () {
+                  $(".alert-info").hide();
+              });
+         }, 5000);

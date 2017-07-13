@@ -78,7 +78,7 @@
   .portlet.light.portlet-fit
     .portlet-title
       .caption
-        %span.caption-subject.sbold.uppercase{:style => "color: #455A64 !important"} Push notification
+        %span.caption-subject.sbold.uppercase{:style => "color: #455A64 !important"} Push notifications
       .actions
         .btn-group.btn-group-devided
           = link_to 'Create notification', new_notification_path, class:"btn green btn-outline btn-sm active", style: "color: white;text-decoration:none"
@@ -93,24 +93,21 @@
               %th{:style => "text-align:center; color: #455A64"} Sent at
               %th{:style => "text-align:center; color: #455A64"} Actions
           %tbody
-            - @notifications.each_with_index  do |gym, index|
+            - @notifications.each_with_index  do |notification, index|
               %tr
                 %td= index+1
+                %td= notification.message
+                %td= User.find(notification.user_id).email
+                %td{:style => "text-align:center; color: #455A64"}= notification.created_at.strftime("%m/%d/%Y at %I:%M%p")
                 %td
-                %td
-                %td
-                %td
-                  -#.actions{:style => "text-align:center"}
-                  -#  .btn-group
-                  -#    %a.btn.dark.btn-outline.btn-circle.btn-sm{"data-close-others" => "true", "data-hover" => "dropdown", "data-toggle" => "dropdown", :href => "javascript:;", :style => "text-decoration: none;"}
-                  -#      Actions
-                  -#      %i.fa.fa-angle-down
-                  -#    %ul.dropdown-menu.pull-right
-                  -#      %li
-                  -#        = link_to 'View', gym
-                  -#      %li
-                  -#        = link_to 'Edit', edit_user_gym_path(current_user, gym)
-                  -#        / <a href="javascript:;"> Option 1</a>
-                  -#      %li.divider
-                  -#      %li{:style => "text-align:center"}
-                  -#        Delete
+                  .actions{:style => "text-align:center"}
+                    .btn-group
+                      %a.btn.dark.btn-outline.btn-circle.btn-sm{"data-close-others" => "true", "data-hover" => "dropdown", "data-toggle" => "dropdown", :href => "javascript:;", :style => "text-decoration: none;"}
+                        Actions
+                        %i.fa.fa-angle-down
+                      %ul.dropdown-menu.pull-right{:style => "text-align:center"}
+                        %li
+                          = link_to 'View', notification
+                        %li.divider
+                        %li
+                          = link_to 'Delete', notification, method: :delete, data: { confirm: 'Are you sure?' }
