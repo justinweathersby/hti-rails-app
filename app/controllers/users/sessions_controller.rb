@@ -1,4 +1,4 @@
-class Users::SessionsController < DeviseTokenAuth::RegistrationsController
+class Users::SessionsController < DeviseTokenAuth::SessionsController
   before_action :configure_sign_in_params, only: [:create]
 
   # GET /resource/sign_in
@@ -9,9 +9,7 @@ class Users::SessionsController < DeviseTokenAuth::RegistrationsController
   # POST /resource/sign_in
   def create
     super do |resource|
-      resource.device_token = params[:device_token] if params[:device_token]
-      resource.device_type = params[:device_type]  if params[:device_type]
-      resource.save!
+      resource.update(:device_token => params[:device_token]) if params[:device_token]
     end
   end
 
