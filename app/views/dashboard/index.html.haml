@@ -6,10 +6,8 @@
           %i.fa.fa-users
         .details
           .number
-
             +
-            %span{"data-counter" => "counterup", "data-value" => "89"}
-            = 0
+            %span{"data-counter" => "counterup", "data-value" => @monthly_growth}
             \%
           .desc Monthly Growth
 
@@ -20,7 +18,7 @@
           %i.fa.fa-line-chart
         .details
           .number
-            %span{"data-counter" => "counterup", "data-value" => "12,5"}= Notification.count
+            %span{"data-counter" => "counterup", "data-value" => Notification.count}
           .desc Push Notifications
 
     .col-lg-3.col-md-3.col-sm-6.col-xs-12
@@ -29,7 +27,7 @@
           %i.fa.fa-envelope
         .details
           .number
-            %span{"data-counter" => "counterup", "data-value" => "549"}= User.count
+            %span{"data-counter" => "counterup", "data-value" => User.count}
           .desc Total Users
 
 .col-sm-12
@@ -37,42 +35,29 @@
   .portlet.light.portlet-fit
     .portlet-title
       .caption
-        %span.caption-subject.sbold.uppercase{:style => "color: #455A64 !important"} New User
+        %span.caption-subject.sbold.uppercase{:style => "color: #455A64 !important"} Users
       .actions
         .btn-group.btn-group-devided
-          -#= link_to 'Add New Gym', new_user_gym_path(current_user), class:"btn green btn-outline btn-sm active", style: "color: white;text-decoration:none"
     .portlet-body{:style => "padding-top: 0;"}
       .table-scrollable.table-scrollable-borderless{:style => "overflow: visible;"}
         %table.table.table-hover.table-light
           %thead
             %tr.uppercase
               %th{:style => "color: #455A64"} #
-              %th{:style => "color: #455A64"} Name
               %th{:style => "color: #455A64"} Email
               %th{:style => "text-align:center; color: #455A64"} Since
-              %th{:style => "text-align:center; color: #455A64"} Actions
+              %th{:style => "text-align:center; color: #455A64"} Device Token
           %tbody
             - @users.each_with_index  do |user, index|
               %tr
                 %td= index+1
-                %td= user.name
                 %td= user.email
                 %td.text-center= user.created_at.strftime('%b, %d %Y')
-                %td
-                  -#.actions{:style => "text-align:center"}
-                  -#  .btn-group
-                  -#    %a.btn.dark.btn-outline.btn-circle.btn-sm{"data-close-others" => "true", "data-hover" => "dropdown", "data-toggle" => "dropdown", :href => "javascript:;", :style => "text-decoration: none;"}
-                  -#      Actions
-                  -#      %i.fa.fa-angle-down
-                  -#    %ul.dropdown-menu.pull-right
-                  -#      %li
-                  -#        = link_to 'View', gym
-                  -#      %li
-                  -#        = link_to 'Edit', edit_user_gym_path(current_user, gym)
-                  -#        / <a href="javascript:;"> Option 1</a>
-                  -#      %li.divider
-                  -#      %li{:style => "text-align:center"}
-                  -#        Delete
+                %td.text-center
+                  - if user.device_token.present?
+                    %span.label.label-sm.label-success Yes
+                  - else
+                    %span.label.label-sm.label-danger No
 .col-sm-12
   / BEGIN BORDERED TABLE PORTLET
   .portlet.light.portlet-fit
@@ -88,8 +73,8 @@
           %thead
             %tr.uppercase
               %th{:style => "color: #455A64"} #
-              %th{:style => "color: #455A64"} Notification
-              %th{:style => "color: #455A64"} Send by
+              %th{:style => "color: #455A64"} Message
+              %th{:style => "color: #455A64"} Sent by
               %th{:style => "text-align:center; color: #455A64"} Sent at
               %th{:style => "text-align:center; color: #455A64"} Actions
           %tbody

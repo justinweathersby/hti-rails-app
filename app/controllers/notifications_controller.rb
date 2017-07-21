@@ -1,5 +1,7 @@
 class NotificationsController < ApplicationController
 
+  before_action :authenticate_admin
+
   def index
     @notifications = Notification.all
   end
@@ -49,5 +51,13 @@ class NotificationsController < ApplicationController
 
   def notification_params
     params.fetch(:notification, {}).permit(:message, :sent_to, :user_id, tokens:[])
+  end
+
+  def authenticate_admin
+    unless current_user.try(:admin?)
+      render json: {
+        status: :unathorized
+      }.to_json
+    end
   end
 end

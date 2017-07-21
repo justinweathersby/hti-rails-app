@@ -14,4 +14,7 @@
 //= require turbolinks
 //= require jquery
 //= require bootstrap-sprockets
+//= require vendor/metronic/js/scripts/datatable
+//= require vendor/metronic/js/plugins/datatables.min
+//= require vendor/metronic/js/plugins/bootstrap/datatables.bootstrap
 //= require_tree .

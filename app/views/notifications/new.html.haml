@@ -3,13 +3,12 @@
   .portlet.light
     .portlet-title
       .caption.font-red-sunglo
-        %span.caption-subject.bold.uppercase{:style => "font-size:24px"} Create Push Notification
+        %span.caption-subject.bold.uppercase{:style => "font-size:24px"} Send Push Notification
         %br/
       .actions
         = link_to :back, :class => "btn btn-circle btn-icon-only red" do
-          %i.fa.fa-trash
-        %a.btn.btn-circle.btn-icon-only.btn-default.fullscreen{"data-original-title" => "", :href => "javascript:;", :title => ""}
-    .portlet-body.form
+          %i.fa.fa-arrow-left
+    .portlet-body.form{:style => "overflow: auto"}
       = form_for(@notification) do |f|
         - if @notification.errors.any?
           %div{:style => "visibility: hidden; height:0;"}
@@ -27,7 +26,6 @@
                 %label.mt-checkbox.mt-checkbox-single.mt-checkbox-outline
                   %input.group-checkable{"data-set" => "#sample_1 .checkboxes", :type => "checkbox"}/
                   %span
-              %th Name
               %th Email
               %th Device Token
               %th Joined
@@ -38,11 +36,15 @@
                   %label.mt-checkbox.mt-checkbox-single.mt-checkbox-outline
                     = check_box_tag 'tokens[]', user.id, false, :class => 'checkboxes'
                     %span
-                %td= user.name
                 %td= user.email
-                %td= user.device_token
+                %td
+                  - if user.device_token.present?
+                    %span.label.label-sm.label-success Yes
+                  - else
+                    %span.label.label-sm.label-danger No
+                -# %td= user.device_token
                 %td{:style => "text-align:center; "}= user.created_at.strftime("%m/%d/%Y")
-        .row{:style => "text-align:center"}
+        .row{:style => "text-align:center; margin: 0;"}
           -# = f.hidden_field :user_id, value: current_user.id
-          = f.submit "Create", :type => "submit", :class=>"btn btn-primary", :style=>"border-radius: 5px !important; margin-top:10px; background: #FF5252; font-family: 'Muli', 'Helvetica', 'Arial', 'sans-serif'; text-shadow:none; font-variant:none; width: 92%; margin-top:30px"
+          = f.submit "Send", :type => "submit", :class=>"btn btn-primary", :style=>"border-radius: 5px !important; margin-top:10px; background: #FF5252; font-family: 'Muli', 'Helvetica', 'Arial', 'sans-serif'; text-shadow:none; font-variant:none; width: 92%; margin-top:30px"
   / END EXAMPLE TABLE PORTLET
