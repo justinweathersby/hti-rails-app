@@ -1,33 +1,33 @@
 %div{:style => " margin-top: 3vh; padding:15px;"}
   .row
     .col-lg-3.col-md-3.col-sm-6.col-xs-12.col-lg-offset-3.col-md-offset-3
-      %a.dashboard-stat.dashboard-stat-v2.red{:href => "#"}
+      .dashboard-stat.dashboard-stat-v2.red{:href => "#"}
         .visual
-          %i.fa.fa-users
+          %i.fa.fa-line-chart
         .details
           .number
             +
-            %span{"data-counter" => "counterup", "data-value" => @monthly_growth}
+            %span{"data-counter" => "counterup", "data-value" => @monthly_growth}=@monthly_growth
             \%
           .desc Monthly Growth
 
 
     .col-lg-3.col-md-3.col-sm-6.col-xs-12
-      %a.dashboard-stat.dashboard-stat-v2.purple{:href => "#"}
-        .visual
-          %i.fa.fa-line-chart
-        .details
-          .number
-            %span{"data-counter" => "counterup", "data-value" => Notification.count}
-          .desc Push Notifications
-
-    .col-lg-3.col-md-3.col-sm-6.col-xs-12
-      %a.dashboard-stat.dashboard-stat-v2.green{:href => "#"}
+      .dashboard-stat.dashboard-stat-v2.purple{:href => "#"}
         .visual
           %i.fa.fa-envelope
         .details
           .number
-            %span{"data-counter" => "counterup", "data-value" => User.count}
+            %span{"data-counter" => "counterup", "data-value" => Notification.count}=Notification.count
+          .desc Push Notifications
+
+    .col-lg-3.col-md-3.col-sm-6.col-xs-12
+      .dashboard-stat.dashboard-stat-v2.green{:href => "#"}
+        .visual
+          %i.fa.fa-users
+        .details
+          .number
+            %span{"data-counter" => "counterup", "data-value" => User.count}=User.count
           .desc Total Users
 
 .col-sm-12
@@ -36,28 +36,47 @@
     .portlet-title
       .caption
         %span.caption-subject.sbold.uppercase{:style => "color: #455A64 !important"} Users
-      .actions
-        .btn-group.btn-group-devided
-    .portlet-body{:style => "padding-top: 0;"}
-      .table-scrollable.table-scrollable-borderless{:style => "overflow: visible;"}
-        %table.table.table-hover.table-light
+    .portlet-body{:style => "padding-top: 15px;"}
+      .table-scrollable.table-scrollable-borderless{:style => "overflow: visible !imporant;"}
+        %table#users_table.table.table-hover.table-light
           %thead
             %tr.uppercase
-              %th{:style => "color: #455A64"} #
-              %th{:style => "color: #455A64"} Email
-              %th{:style => "text-align:center; color: #455A64"} Since
-              %th{:style => "text-align:center; color: #455A64"} Device Token
+              %th{:style => " color: #455A64"} #
+              %th{:style => " color: #455A64"} Email
+              %th{:style => " color: #455A6A"} Since
+              %th{:style => " color: #455A64"} Device Token
           %tbody
-            - @users.each_with_index  do |user, index|
+            - @users.each_with_index  do | user, index |
               %tr
                 %td= index+1
                 %td= user.email
-                %td.text-center= user.created_at.strftime('%b, %d %Y')
-                %td.text-center
+                %td= user.created_at.strftime("%m/%d/%Y at %I:%M%p")
+                %td
                   - if user.device_token.present?
                     %span.label.label-sm.label-success Yes
                   - else
                     %span.label.label-sm.label-danger No
+
+    -# .portlet-body{:style => "padding-top: 0;"}
+    -#   .table-scrollable.table-scrollable-borderless{:style => "overflow: visible;"}
+    -#     %table.table.table-hover.table-light
+    -#       %thead
+    -#         %tr.uppercase
+    -#           %th{:style => "color: #455A64"} #
+    -#           %th{:style => "color: #455A64"} Email
+    -#           %th{:style => "text-align:center; color: #455A64"} Since
+    -#           %th{:style => "text-align:center; color: #455A64"} Device Token
+    -#       %tbody
+    -#         - @users.each_with_index  do |user, index|
+    -#           %tr
+    -#             %td= index+1
+    -#             %td= user.email
+    -#             %td.text-center= user.created_at.strftime('%b, %d %Y')
+    -#             %td.text-center
+    -#               - if user.device_token.present?
+    -#                 %span.label.label-sm.label-success Yes
+    -#               - else
+    -#                 %span.label.label-sm.label-danger No
 .col-sm-12
   / BEGIN BORDERED TABLE PORTLET
   .portlet.light.portlet-fit
@@ -69,7 +88,7 @@
           = link_to 'Create notification', new_notification_path, class:"btn green btn-outline btn-sm active", style: "color: white;text-decoration:none"
     .portlet-body{:style => "padding-top: 0;"}
       .table-scrollable.table-scrollable-borderless{:style => "overflow: visible;"}
-        %table.table.table-hover.table-light
+        %table#push_notifications_index_table.table.table-hover.table-light
           %thead
             %tr.uppercase
               %th{:style => "color: #455A64"} #

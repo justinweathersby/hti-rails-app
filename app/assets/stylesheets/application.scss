@@ -22,6 +22,19 @@
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
+.dropdown-menu.dropdown-menu-default::before{
+  border: none;
+}
+
+#users_table{
+  border-left: 0;
+  border-right: 0;
+}
+
+#users_table_wrapper{
+  .row{ margin-left: 0; margin-right: 0}
+}
+
 
 thead th {
   background: white;
@@ -173,4 +186,8 @@ div {
     font-size: 12px;
     list-style: square;
   }
+}
+
+.form-group.form-md-line-input{
+  padding-top:25px;
 }

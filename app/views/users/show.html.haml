@@ -6,16 +6,9 @@
   .portlet.light
     .portlet-title
       .caption.font-red-sunglo
-        %span.caption-subject.bold.uppercase{:style => "font-size:24px"}= @user.name
+        %span.caption-subject.bold.uppercase{:style => "font-size:24px"}= @user.email
         %br/
         %small{:style => "font-size:12px; color:gray"}= @user.created_at.strftime("Member Since: %m/%d/%Y")
-      .actions
-        = link_to :back, :class => "btn btn-circle btn-icon-only red" do
-          %i.icon-trash
-        - if signed_in? and current_user == @user
-          = link_to edit_user_registration_path, :class => "btn btn-circle btn-icon-only blue" do
-            %i.icon-cloud-upload
-        %a.btn.btn-circle.btn-icon-only.btn-default.fullscreen{"data-original-title" => "", :href => "javascript:;", :title => ""}
     .portlet-body.form
       .form-group.form-md-line-input.form-md-floating-label{:style => "margin-bottom:15px"}
         %label{:for => "form_control_1"} Description
