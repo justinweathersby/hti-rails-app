@@ -1,0 +1,27 @@
+.row{:style => "padding-top:40px"}
+  .col-xs-12.col-md-8.col-lg-6.col-md-offset-2.col-lg-offset-3{:style => "padding-left:0; padding-right:0"}
+    %div{:style => " width:100%;"}
+      .row{:style => "margin-left:0; margin-right:0"}
+        .col-sm-12.form-box
+          = form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f|
+            %div{:style => "visibility: hidden; height:0;"}
+              = flash[:notice] #= flash[:notice].to_a.concat resource.errors.full_messages
+            .f1-steps{:style => "padding-bottom: 20px; margin-top:0"}
+              .f1-step.active{:style => "float:none; margin: 0 auto"}
+                .f1-step-icon{:style => "background: #455A64; border-radius: 50% !important"}
+                  %i.fa.fa-user
+            = f.hidden_field :reset_password_token
+            .form-group.form-md-line-input.form-md-floating-label{:style => "padding-bottom: 0px; margin-bottom:0"}
+              .input-group{:style => ""}
+                = f.password_field :password, autocomplete: :off,  class: "form-control", style: "width:100%"
+                %label{:for => "form_control_1", :style => "font-size:12px;"} Password
+                %span.input-group-addon
+                  %i.fa.fa-envelope-o
+            .form-group.form-md-line-input.form-md-floating-label{:style => "padding-bottom: 5px;"}
+              .input-group
+                = f.password_field :password_confirmation, autocomplete: :off, class: "form-control", style: "width:100%"
+                %label{:for => "form_control_1", :style => "font-size:12px;"} Password Confirmation
+                %span.input-group-addon
+                  %i.fa.fa-lock
+            .row{:style => "text-align:center"}
+              = f.submit 'Reset Password', :class => "btn btn-next", :style => "border-radius: 5px !important; margin-top:10px; background: #FF5252; font-family: 'Muli', 'Helvetica', 'Arial', 'sans-serif'; text-shadow:none; font-variant:none; width: 92%"
