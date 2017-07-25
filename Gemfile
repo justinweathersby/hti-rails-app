@@ -37,6 +37,7 @@ gem 'jquery-rails', '~> 4.0', '>= 4.0.5'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
+gem 'browser-timezone-rails'
 
 gem 'devise'
 gem 'devise_token_auth'
