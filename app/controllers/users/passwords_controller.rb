@@ -21,9 +21,12 @@ class Users::PasswordsController < Devise::PasswordsController
 
   # protected
 
-  def after_resetting_password_path_for(resource)
-    # super(resource)
+  def after_update_path_for(resource)
     redirect_to new_user_session_path
+  end
+
+  def after_resetting_password_path_for(resource)
+    super(resource)
   end
 
   # The path used after sending reset password instructions
