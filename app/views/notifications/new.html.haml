@@ -8,8 +8,7 @@
       .actions
         = link_to :back, :class => "btn btn-circle btn-icon-only red" do
           %i.fa.fa-arrow-left
-
-    -# .portlet-body.form{:style => "overflow: auto"}
+          
     .portlet-body.form
       = form_for(@notification) do |f|
         - if @notification.errors.any?
