@@ -16,8 +16,8 @@ class NotificationsController < ApplicationController
     # @users = User.where.not('device_token' => nil)
   end
 
-  def edit
-  end
+  # def edit
+  # end
 
   def create
     @users = User.all
