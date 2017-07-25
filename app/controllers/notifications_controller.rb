@@ -26,16 +26,24 @@ class NotificationsController < ApplicationController
     @notification.user_id = current_user.id
 
     @notification.sent_to = params[:tokens]
-    @notification.sent_to.each do |t|
-      device_token = @users.find(t).device_token
-      @notification.tokens.push(device_token) unless device_token.nil?
-    end
 
-    respond_to do |format|
-      if @notification.save
-        format.html { redirect_to root_path, notice: 'Push Notification was successfully created.' }
-      else
-        format.html { render :new }
+    if @notification.sent_to.present?
+      @notification.sent_to.each do |t|
+        device_token = @users.find(t).device_token
+        @notification.tokens.push(device_token) unless device_token.nil?
+      end
+
+      respond_to do |format|
+        if @notification.save
+          format.html { redirect_to root_path, notice: 'Push Notification was successfully created.' }
+        else
+          format.html { render :new }
+        end
+      end
+
+    else
+      respond_to do |format|
+        format.html { redirect_to root_path, notice: 'Error: Please select at least one user to send a push notification.' }
       end
     end
   end
