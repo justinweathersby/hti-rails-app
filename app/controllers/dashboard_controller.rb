@@ -12,6 +12,7 @@ class DashboardController < ApplicationController
       render json: {
         status: :unathorized
       }.to_json
+      # redirect_to new_user_session_url
     end
   end
 
