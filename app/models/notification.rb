@@ -8,10 +8,6 @@ class Notification < ApplicationRecord
   validates :message, presence: true
   validates :tokens,  presence: true
 
-  # attribute :tokens, :string, array: true
-  # serialize :tokens, Array
-  # serialize :sent_to, Array
-
 private
   def upload_notification_to_ionic
     puts "Push Notification Created: Sent-to: self.tokens.to_json"

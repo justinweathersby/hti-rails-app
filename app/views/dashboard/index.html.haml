@@ -57,26 +57,6 @@
                   - else
                     %span.label.label-sm.label-danger No
 
-    -# .portlet-body{:style => "padding-top: 0;"}
-    -#   .table-scrollable.table-scrollable-borderless{:style => "overflow: visible;"}
-    -#     %table.table.table-hover.table-light
-    -#       %thead
-    -#         %tr.uppercase
-    -#           %th{:style => "color: #455A64"} #
-    -#           %th{:style => "color: #455A64"} Email
-    -#           %th{:style => "text-align:center; color: #455A64"} Since
-    -#           %th{:style => "text-align:center; color: #455A64"} Device Token
-    -#       %tbody
-    -#         - @users.each_with_index  do |user, index|
-    -#           %tr
-    -#             %td= index+1
-    -#             %td= user.email
-    -#             %td.text-center= user.created_at.strftime('%b, %d %Y')
-    -#             %td.text-center
-    -#               - if user.device_token.present?
-    -#                 %span.label.label-sm.label-success Yes
-    -#               - else
-    -#                 %span.label.label-sm.label-danger No
 .col-sm-12
   / BEGIN BORDERED TABLE PORTLET
   .portlet.light.portlet-fit
